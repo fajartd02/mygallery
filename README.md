@@ -12,7 +12,7 @@
 - clone this repo
 - set the env
 - run `docker compose up` for database
-- create database sad-db (should be same with env)
+- create database mygallery (should be same with env)
 - run `go install`
 - run `go mod tidy`
 - run `go run .`
