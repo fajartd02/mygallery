@@ -72,6 +72,7 @@ func SetupRoutes(
 		memory.POST("", memoryHdl.CreateMemory)
 		memory.PUT("/:memoryId", memoryHdl.UpdateMemory)
 		memory.DELETE("/:memoryId", memoryHdl.DeleteMemory)
+		memory.POST("/list", memoryHdl.ListMemory)
 
 	}
 
