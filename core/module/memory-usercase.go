@@ -63,11 +63,11 @@ func (em memoryUseCase) FindAll(c *gin.Context) ([]entity.Memory, error) {
 
 func (em memoryUseCase) List(c *gin.Context, memoryList entity.MemoryListRequest) ([]entity.Memory, error) {
 	if memoryList.Filter.By == "" {
-		memoryList.Filter.By = "description"
+		memoryList.Filter.By = "tag"
 	}
 
 	if memoryList.Sort.By == "" {
-		memoryList.Sort.By = "description"
+		memoryList.Sort.By = "tag"
 	}
 
 	memories, err := em.memoRepo.List(c, memoryList)
