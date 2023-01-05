@@ -49,6 +49,7 @@ func SetupRoutes(
 		file.StaticFS("/static", http.Dir("images"))
 
 		memory := apiV1.Group("/memories")
+		memory.Use(module.IsAuthorized())
 		memory.GET("", memoryHdl.GetAll)
 		memory.POST("", memoryHdl.CreateMemory)
 		memory.PUT("/:memoryId", memoryHdl.UpdateMemory)
