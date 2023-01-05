@@ -15,4 +15,5 @@ type MemoryRepository interface {
 	Delete(c *gin.Context) error
 	FindAll(c *gin.Context) ([]entity.Memory, error)
 	Update(c *gin.Context, memory entity.Memory) error
+	List(c *gin.Context, memoryList entity.MemoryListRequest) ([]entity.Memory, error)
 }
