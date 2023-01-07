@@ -13,9 +13,10 @@ import (
 var ErrMemoryNotFound = errors.New("memory error: ")
 
 type MemoryUseCase interface {
-	CreateMemory(c *gin.Context, memory entity.Memory) error
+	CreateMemory(c *gin.Context, memory entity.Memory) (entity.Memory, error)
 	DeleteMemory(c *gin.Context) error
 	FindAll(c *gin.Context) ([]entity.Memory, error)
+	FindByID(c *gin.Context) (entity.Memory, error)
 	UpdateMemory(c *gin.Context, memory entity.Memory) error
 	List(c *gin.Context, memoryList entity.MemoryListRequest) ([]entity.Memory, error)
 }
@@ -28,15 +29,15 @@ func NewMemoryUseCase(repo repository.MemoryRepository) MemoryUseCase {
 	return &memoryUseCase{repo}
 }
 
-func (em memoryUseCase) CreateMemory(c *gin.Context, memory entity.Memory) error {
+func (em memoryUseCase) CreateMemory(c *gin.Context, memory entity.Memory) (entity.Memory, error) {
 	memory, err := em.memoRepo.Create(c, memory)
 	if err != nil {
 		if errors.Is(err, repository.ErrRecordMemoryNotFound) {
-			return fmt.Errorf("%w.", ErrMemoryNotFound)
+			return entity.Memory{}, fmt.Errorf("%w.", ErrMemoryNotFound)
 		}
-		return fmt.Errorf("%w: %v", ErrMemoryNotFound, err)
+		return entity.Memory{}, fmt.Errorf("%w: %v", ErrMemoryNotFound, err)
 	}
-	return nil
+	return memory, err
 }
 
 func (em memoryUseCase) DeleteMemory(c *gin.Context) error {
@@ -59,6 +60,17 @@ func (em memoryUseCase) FindAll(c *gin.Context) ([]entity.Memory, error) {
 		return nil, fmt.Errorf("%w: %v", ErrMemoryNotFound, err)
 	}
 	return memories, nil
+}
+
+func (em memoryUseCase) FindByID(c *gin.Context) (entity.Memory, error) {
+	memory, err := em.memoRepo.FindByID(c)
+	if err != nil {
+		if errors.Is(err, repository.ErrRecordMemoryNotFound) {
+			return entity.Memory{}, fmt.Errorf("%w.", ErrMemoryNotFound)
+		}
+		return entity.Memory{}, fmt.Errorf("%w: %v", ErrMemoryNotFound, err)
+	}
+	return memory, nil
 }
 
 func (em memoryUseCase) List(c *gin.Context, memoryList entity.MemoryListRequest) ([]entity.Memory, error) {

@@ -23,6 +23,8 @@ func NewMemoryHandler(memoryUc module.MemoryUseCase) *MemoryHandler {
 
 func (hdl *MemoryHandler) CreateMemory(c *gin.Context) {
 	var input entity.MemoryInput
+	var createdMemory entity.Memory
+
 	if err := c.Bind(&input); err != nil {
 		c.AbortWithStatusJSON(500, gin.H{"message": err.Error()})
 		return
@@ -48,7 +50,7 @@ func (hdl *MemoryHandler) CreateMemory(c *gin.Context) {
 		return
 	}
 
-	// Create Memory
+	// Create Memory input
 	memory := entity.Memory{
 		UserID:      uint(userID),
 		ImageUrl:    newNameFile,
@@ -56,7 +58,7 @@ func (hdl *MemoryHandler) CreateMemory(c *gin.Context) {
 		Tag:         input.Tag,
 	}
 
-	err = hdl.memoryUc.CreateMemory(c, memory)
+	createdMemory, err = hdl.memoryUc.CreateMemory(c, memory)
 
 	if err != nil {
 		c.AbortWithStatusJSON(500, gin.H{"message": err.Error()})
@@ -66,7 +68,7 @@ func (hdl *MemoryHandler) CreateMemory(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Sucessfully created memory!",
 		"status":  http.StatusOK,
-		"data":    memory,
+		"data":    createdMemory,
 	})
 }
 
@@ -81,6 +83,20 @@ func (hdl *MemoryHandler) GetAll(c *gin.Context) {
 		"message": "Sucessfully fetch all memory!",
 		"status":  http.StatusOK,
 		"data":    memories,
+	})
+}
+
+func (hdl *MemoryHandler) GetById(c *gin.Context) {
+	memory, err := hdl.memoryUc.FindByID(c)
+	if err != nil {
+		c.AbortWithStatusJSON(500, gin.H{"message": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Sucessfully fetch memory!",
+		"status":  http.StatusOK,
+		"data":    memory,
 	})
 }
 
