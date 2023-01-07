@@ -23,6 +23,8 @@ func NewMemoryHandler(memoryUc module.MemoryUseCase) *MemoryHandler {
 
 func (hdl *MemoryHandler) CreateMemory(c *gin.Context) {
 	var input entity.MemoryInput
+	var createdMemory entity.Memory
+
 	if err := c.Bind(&input); err != nil {
 		c.AbortWithStatusJSON(500, gin.H{"message": err.Error()})
 		return
@@ -48,7 +50,7 @@ func (hdl *MemoryHandler) CreateMemory(c *gin.Context) {
 		return
 	}
 
-	// Create Memory
+	// Create Memory input
 	memory := entity.Memory{
 		UserID:      uint(userID),
 		ImageUrl:    newNameFile,
@@ -56,7 +58,7 @@ func (hdl *MemoryHandler) CreateMemory(c *gin.Context) {
 		Tag:         input.Tag,
 	}
 
-	err = hdl.memoryUc.CreateMemory(c, memory)
+	createdMemory, err = hdl.memoryUc.CreateMemory(c, memory)
 
 	if err != nil {
 		c.AbortWithStatusJSON(500, gin.H{"message": err.Error()})
@@ -66,7 +68,7 @@ func (hdl *MemoryHandler) CreateMemory(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Sucessfully created memory!",
 		"status":  http.StatusOK,
-		"data":    memory,
+		"data":    createdMemory,
 	})
 }
 
