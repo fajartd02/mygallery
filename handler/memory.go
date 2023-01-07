@@ -86,6 +86,20 @@ func (hdl *MemoryHandler) GetAll(c *gin.Context) {
 	})
 }
 
+func (hdl *MemoryHandler) GetById(c *gin.Context) {
+	memory, err := hdl.memoryUc.FindByID(c)
+	if err != nil {
+		c.AbortWithStatusJSON(500, gin.H{"message": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Sucessfully fetch memory!",
+		"status":  http.StatusOK,
+		"data":    memory,
+	})
+}
+
 func (hdl *MemoryHandler) ListMemory(c *gin.Context) {
 	var input entity.MemoryListRequest
 	if err := c.ShouldBindJSON(&input); err != nil {

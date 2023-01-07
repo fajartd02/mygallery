@@ -10,6 +10,21 @@ import (
 	"github.com/fajartd02/mygallery/handler"
 )
 
+// -- DEV ONLY -- cors setup
+func CORSMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "*")
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+		c.Next()
+	}
+}
+
 func SetupRoutes(
 	db *gorm.DB,
 	// cfg config.Config,
@@ -29,6 +44,9 @@ func SetupRoutes(
 	r.GET("/health", func(ctx *gin.Context) {
 		ctx.String(http.StatusOK, "okss")
 	})
+
+	// -- DEV ONLY --
+	r.Use(CORSMiddleware())
 
 	apiV1 := r.Group("/api/v1")
 	{
@@ -51,6 +69,7 @@ func SetupRoutes(
 		memory := apiV1.Group("/memories")
 		memory.Use(module.IsAuthorized())
 		memory.GET("", memoryHdl.GetAll)
+		memory.GET("/:memoryId", memoryHdl.GetById)
 		memory.POST("", memoryHdl.CreateMemory)
 		memory.PUT("/:memoryId", memoryHdl.UpdateMemory)
 		memory.DELETE("/:memoryId", memoryHdl.DeleteMemory)

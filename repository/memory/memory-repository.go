@@ -49,6 +49,22 @@ func (r *repositoryMemory) FindAll(c *gin.Context) ([]entity.Memory, error) {
 	return memories, nil
 }
 
+func (r *repositoryMemory) FindByID(c *gin.Context) (entity.Memory, error) {
+	var memory entity.Memory
+
+	db, ok := c.MustGet("db").(*gorm.DB)
+	if !ok {
+		return entity.Memory{}, errors.New("failed to parse db to gorm")
+	}
+
+	userIdHeader := c.Request.Header["User-Id"]
+	if err := db.Model(&entity.Memory{}).Where("user_id = ? AND id = ?", userIdHeader, c.Param("memoryId")).First(&memory).Error; err != nil {
+		return entity.Memory{}, repository_intf.ErrRecordUserNotFound
+	}
+
+	return memory, nil
+}
+
 func (r *repositoryMemory) List(c *gin.Context, memoryList entity.MemoryListRequest) ([]entity.Memory, error) {
 	var memories []entity.Memory
 
