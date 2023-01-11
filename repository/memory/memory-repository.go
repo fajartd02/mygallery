@@ -89,6 +89,7 @@ func (r *repositoryMemory) Update(c *gin.Context, memory entity.Memory) error {
 	if !ok {
 		return errors.New("failed to parse db to gorm")
 	}
+
 	var oldMemory entity.Memory
 	if err := db.First(&oldMemory, c.Param("memoryId")).Error; err != nil {
 		return errors.New("old memory didn't exists!")
@@ -98,18 +99,19 @@ func (r *repositoryMemory) Update(c *gin.Context, memory entity.Memory) error {
 		return errors.New("failed to update memory")
 	}
 
-	mydir, err := os.Getwd()
-	if err != nil {
-		fmt.Println(err)
+	if memory.ImageUrl != "" {
+		mydir, err := os.Getwd()
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		deleteDir := mydir + "/images/" + oldMemory.ImageUrl
+		e := os.Remove(deleteDir)
+		if e != nil {
+			log.Fatal(e)
+
+		}
 	}
-
-	deleteDir := mydir + "/images/" + oldMemory.ImageUrl
-	e := os.Remove(deleteDir)
-	if e != nil {
-		log.Fatal(e)
-
-	}
-
 	return nil
 }
 

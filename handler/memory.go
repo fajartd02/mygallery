@@ -140,9 +140,15 @@ func (hdl *MemoryHandler) UpdateMemory(c *gin.Context) {
 		return
 	}
 
-	file, _ := c.FormFile("file")
-	var newNameFile = uuid.NewString() + "-" + file.Filename
-	var dst = "images/" + newNameFile
+	var newNameFile string
+	var dst string
+
+	file, notFound := c.FormFile("file")
+
+	if notFound == nil {
+		newNameFile = uuid.NewString() + "-" + file.Filename
+		dst = "images/" + newNameFile
+	}
 
 	// Update User
 	memory := entity.Memory{
@@ -153,9 +159,11 @@ func (hdl *MemoryHandler) UpdateMemory(c *gin.Context) {
 
 	err := hdl.memoryUc.UpdateMemory(c, memory)
 
-	if err := c.SaveUploadedFile(file, dst); err != nil {
-		c.AbortWithStatusJSON(500, gin.H{"message": err.Error()})
-		return
+	if notFound == nil {
+		if err := c.SaveUploadedFile(file, dst); err != nil {
+			c.AbortWithStatusJSON(500, gin.H{"message": err.Error()})
+			return
+		}
 	}
 
 	if err != nil {
