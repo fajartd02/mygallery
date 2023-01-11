@@ -3,6 +3,7 @@ package module
 import (
 	"errors"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -11,7 +12,7 @@ import (
 )
 
 var (
-	secretkey               = "asdfasdfasdf"
+	secretkey               = os.Getenv("secret_key")
 	ErrUserNotFound         = errors.New("user error: ")
 	ErrRecordReportNotFound = errors.New("report error: ")
 )
