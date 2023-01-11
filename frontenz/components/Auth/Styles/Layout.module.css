@@ -1,0 +1,39 @@
+.auth_layout {
+  color: black;
+  width: 100%;
+  max-width: var(--max-width);
+  min-height: calc(100vh - var(--header-height));
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (max-width: 1199.98px) {
+  .auth_layout {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .auth_layout {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 911.98px) {
+  .auth_layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 479.98px) {
+  .auth_layout {
+    font-size: 9px;
+  }
+}
+
+@media screen and (max-width: 321.98px) {
+  .auth_layout {
+    font-size: 7px;
+  }
+}

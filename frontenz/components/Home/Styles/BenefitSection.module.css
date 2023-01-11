@@ -1,0 +1,66 @@
+.heading {
+  color: black;
+}
+
+.heading_title {
+  font-weight: 700;
+  font-size: 1.2em;
+  color: #82aae3;
+}
+
+.heading_subtitle {
+  font-weight: 600;
+  font-size: 2em;
+  color: #000000;
+}
+
+/* Card */
+.card {
+  gap: 1.5em;
+  background: #ffffff;
+  box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.2);
+  border-radius: 7px;
+}
+
+.card_icon_svg {
+  width: 4.375em;
+  height: 4.375em;
+}
+
+.card_title {
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 150%;
+  color: #000000;
+}
+
+.card_description {
+  font-weight: 400;
+  font-size: 1.05em;
+  line-height: 150%;
+  color: #000000;
+}
+
+@media screen and (max-width: 1199.98px) {
+  .card_container {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .heading {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .heading {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .heading {
+    font-size: 8px;
+  }
+}

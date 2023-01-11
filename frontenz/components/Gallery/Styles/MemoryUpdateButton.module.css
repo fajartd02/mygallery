@@ -1,0 +1,17 @@
+.container {
+  width: 13em;
+  height: 4em;
+  border: none;
+}
+
+.container span {
+  font-size: 1.25em;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    width: 10em;
+    height: 3em;
+  }
+}

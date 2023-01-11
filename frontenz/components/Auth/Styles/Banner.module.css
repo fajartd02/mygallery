@@ -1,0 +1,27 @@
+.banner_section {
+  display: flex;
+  background-color: #91d8e4;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.banner_container {
+  position: relative;
+  width: 480px;
+  height: 480px;
+}
+
+@media screen and (max-width: 1199.98px) {
+  .banner_container {
+    position: relative;
+    width: 450px;
+    height: 450px;
+  }
+}
+
+@media screen and (max-width: 911.98px) {
+  .banner_section {
+    display: none;
+  }
+}

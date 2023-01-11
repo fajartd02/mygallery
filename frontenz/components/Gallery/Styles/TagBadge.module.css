@@ -1,0 +1,13 @@
+.badge {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+  background: var(--primary-color);
+  border-radius: 13;
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 700;
+}
