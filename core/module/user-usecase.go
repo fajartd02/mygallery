@@ -71,6 +71,7 @@ func (em *userUsecase) Login(c *gin.Context, loginInput entity.LoginInput) (enti
 	token.UserID = authUser.ID
 	token.Email = authUser.Email
 	token.TokenString = validToken
+	token.FullName = authUser.FullName
 	return token, nil
 }
 
