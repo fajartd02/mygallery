@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/fajartd02/mygallery/core/entity"
-	"github.com/fajartd02/mygallery/core/module"
+	"github.com/fajartd02/mygallery/backend/core/entity"
+	"github.com/fajartd02/mygallery/backend/core/module"
 )
 
 type UserHandler struct {

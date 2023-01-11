@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/fajartd02/mygallery/core/entity"
-	"github.com/fajartd02/mygallery/core/repository"
+	"github.com/fajartd02/mygallery/backend/core/entity"
+	"github.com/fajartd02/mygallery/backend/core/repository"
 )
 
 type UserUsecase interface {

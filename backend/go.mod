@@ -1,4 +1,4 @@
-module github.com/fajartd02/mygallery
+module github.com/fajartd02/mygallery/backend
 
 go 1.17
 

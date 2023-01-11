@@ -7,8 +7,8 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/fajartd02/mygallery/core/entity"
-	repository_intf "github.com/fajartd02/mygallery/core/repository"
+	"github.com/fajartd02/mygallery/backend/core/entity"
+	repository_intf "github.com/fajartd02/mygallery/backend/core/repository"
 )
 
 type repositoryUser struct {

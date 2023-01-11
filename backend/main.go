@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/fajartd02/mygallery/config"
-	"github.com/fajartd02/mygallery/core/entity"
-	"github.com/fajartd02/mygallery/core/module"
-	"github.com/fajartd02/mygallery/handler"
-	memoryrepository "github.com/fajartd02/mygallery/repository/memory"
-	userrepository "github.com/fajartd02/mygallery/repository/user"
-	"github.com/fajartd02/mygallery/routes"
+	"github.com/fajartd02/mygallery/backend/config"
+	"github.com/fajartd02/mygallery/backend/core/entity"
+	"github.com/fajartd02/mygallery/backend/core/module"
+	"github.com/fajartd02/mygallery/backend/handler"
+	memoryrepository "github.com/fajartd02/mygallery/backend/repository/memory"
+	userrepository "github.com/fajartd02/mygallery/backend/repository/user"
+	"github.com/fajartd02/mygallery/backend/routes"
 )
 
 func main() {

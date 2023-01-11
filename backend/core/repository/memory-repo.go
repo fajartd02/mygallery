@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/fajartd02/mygallery/core/entity"
+	"github.com/fajartd02/mygallery/backend/core/entity"
 )
 
 var ErrRecordMemoryNotFound = errors.New("record memory not found")

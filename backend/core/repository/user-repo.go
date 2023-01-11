@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/fajartd02/mygallery/core/entity"
+	"github.com/fajartd02/mygallery/backend/core/entity"
 )
 
 var ErrRecordUserNotFound = errors.New("record not found")

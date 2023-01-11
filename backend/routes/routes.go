@@ -6,8 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 
-	"github.com/fajartd02/mygallery/core/module"
-	"github.com/fajartd02/mygallery/handler"
+	"github.com/fajartd02/mygallery/backend/core/module"
+	"github.com/fajartd02/mygallery/backend/handler"
 )
 
 // -- DEV ONLY -- cors setup
